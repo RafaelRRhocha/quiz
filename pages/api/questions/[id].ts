@@ -9,9 +9,9 @@ export default function handler(
   const userId = req.query.id;
 
   const selectedQuestions = questions.filter(question => question.id === Number(userId));
-
+  
   if(selectedQuestions.length === 1) {
-    res.status(200).json(selectedQuestions[0].convertQuestionsToObject());
+    res.status(200).json(selectedQuestions[0].shuffleAnswers().convertQuestionsToObject());
   }
 
   res.status(204).end();

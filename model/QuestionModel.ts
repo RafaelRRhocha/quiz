@@ -1,3 +1,4 @@
+import shuffle from "../utils/shuffle";
 import AnswerModel from "./AnswerModel";
 
 export default class QuestionModel {
@@ -34,6 +35,11 @@ export default class QuestionModel {
       if(answer.revealed) return true
     }
     return false
+  }
+
+  shuffleAnswers(): QuestionModel {
+    let shuffledAnswers = shuffle(this.#answers);
+    return new QuestionModel(this.#id, this.#statement, shuffledAnswers, this.#hit);
   }
 
   convertQuestionsToObject() {
