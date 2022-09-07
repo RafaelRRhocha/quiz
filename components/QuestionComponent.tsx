@@ -31,6 +31,7 @@ const QuestionComponent: FC<QuestionComponentProps> = ({ question, onResponseQue
           letter={ letters[i].letterStr }
           backgroundLetterColor={ letters[i].color }
           onResponseAnswer={ onResponseQuestion }
+          changeOpacity={ question.answered }
         />
       ))}
     </div>

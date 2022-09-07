@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
-import ButtonComponent from '../components/ButtonComponent'
-import QuestionComponent from '../components/QuestionComponent'
+import QuizComponent from '../components/QuizComponent'
 import AnswerModel from '../model/AnswerModel'
 import QuestionModel from '../model/QuestionModel'
 
@@ -13,28 +12,35 @@ const mockQuestion = new QuestionModel(5, 'Qual o nome do presidente do Brasil q
 ]);
 
 const Home: NextPage = () => {
-  const [getQuestionMock, setQuestionMock] = useState( mockQuestion );
+  const [getQuestion, setGetQuestion] = useState(mockQuestion);
+
+  const questionAnsweredFunction = () => {
+
+  }
+
+  const nextStepFunction = () => {
+
+  }
 
   const onResponse = (index: number) => {
-    setQuestionMock(getQuestionMock.replyWith(index))
+    setGetQuestion(getQuestion.replyWith(index))
   };
 
   const timesUp = () => {
-    if(!getQuestionMock.answered) {
-      setQuestionMock(getQuestionMock.replyWith(-1));
+    if(!getQuestion.answered) {
+      setGetQuestion(getQuestion.replyWith(-1));
     }
   };
 
   return (
-    <div className="flex flex-col gap-2 h-[100vh] justify-center items-center">
-      <QuestionComponent
-        question={ getQuestionMock }
-        onResponseQuestion={onResponse}
-        timesUpQuestion={timesUp}
-        timeForResponse={ 15 }
-      />
-      <ButtonComponent text="Próxima Questão" hrefComponent="/results" disable={getQuestionMock.answered} />
-    </div>
+    <QuizComponent
+      question={ getQuestion }
+      lastQuestion={ false }
+      questionAnswered={ questionAnsweredFunction }
+      nextStep={ nextStepFunction }
+      onResponseProps={ onResponse }
+      timesUpProps={ timesUp }
+    />
   )
 }
 

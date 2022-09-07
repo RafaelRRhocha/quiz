@@ -1,8 +1,8 @@
 body {
   color: white;
   animation: anime 10s ease infinite;
-  background: linear-gradient(45deg, #9400D3, #B83AF6);
-  background-size: 200% 200%;
+  background: linear-gradient(45deg, #7600B7, #9400D3, #A624E4);
+  background-size: 300% 300%;
   font-weight: bolder;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

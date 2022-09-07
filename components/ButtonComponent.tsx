@@ -12,12 +12,12 @@ const ButtonComponent: FC<ButtonComponentProps> = ({ hrefComponent, text, onClic
   return (
     hrefComponent ? (
       <Link href={ hrefComponent }>
-        <button disabled={!disable} onClick={ onClickComponent } className="bg-[#9885F0] mt-[20px] rounded-md font-semibold text-[2rem] py-[10px] px-[25px] disabled:opacity-[0.3]">
+        <button disabled={!disable} onClick={ onClickComponent } className="bg-[#9885F0] mt-[20px] rounded-md font-semibold text-[2rem] py-[10px] px-[20px] disabled:opacity-[0.3] scale-90 disabled:hover:scale-90 hover:scale-100 transition-transform">
           {text}
         </button>
       </Link>
     ) : (
-      <button disabled={!disable} onClick={ onClickComponent } className="bg-[#9885F0] mt-[20px] rounded-md font-semibold text-[2rem] py-[10px] px-[25px] disabled:opacity-[0.3]">
+      <button disabled={!disable} onClick={ onClickComponent } className="bg-[#9885F0] mt-[20px] rounded-md font-semibold text-[2rem] py-[10px] px-[20px] disabled:opacity-[0.3] scale-90 disabled:hover:scale-90 hover:scale-100 transition-transform">
         {text}
       </button>
     )
