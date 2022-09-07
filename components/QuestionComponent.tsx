@@ -1,14 +1,17 @@
 import type { FC } from 'react';
 import QuestionModel from '../model/QuestionModel';
 import AnswerComponent from './AnswerComponent';
+import CountdownComponent from './CountdownComponent';
 import StatementComponent from './StatementComponent';
 
 interface QuestionComponentProps {
   question: QuestionModel
+  timeForResponse?: number
   onResponseQuestion: (index: number) => void
+  timesUpQuestion: () =>  void
 }
 
-const QuestionComponent: FC<QuestionComponentProps> = ({ question, onResponseQuestion }) => {
+const QuestionComponent: FC<QuestionComponentProps> = ({ question, onResponseQuestion, timesUpQuestion, timeForResponse }) => {
   const letters = [
     { letterStr: 'A', color: '#F2C866'},
     { letterStr: 'B', color: '#F266BA'},
@@ -17,8 +20,9 @@ const QuestionComponent: FC<QuestionComponentProps> = ({ question, onResponseQue
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-[40px]">
       <StatementComponent text={question.statement} />
+      <CountdownComponent durationTime={ timeForResponse ?? 10 } timesUpCountdown={ timesUpQuestion } />
       {question.answers.map((element, i) => (
         <AnswerComponent
           key={ i }

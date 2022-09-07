@@ -7,7 +7,7 @@ interface StatementComponentProps {
 const StatementComponent: FC<StatementComponentProps> = ({ text }) => {
   return (
     <div className="flex">
-      <p className="text-[2.5rem] text-center">
+      <p className="text-[2.5rem] text-center select-none">
         {text}
       </p>
     </div>

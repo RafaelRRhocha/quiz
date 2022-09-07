@@ -10,7 +10,6 @@ interface AnswerComponentProps {
 }
 
 const AnswerComponent: FC<AnswerComponentProps> = ({answer, index, letter, backgroundLetterColor, onResponseAnswer}) => {
-  
   return (
     <div className="flex m-[10px] w-[800px] min-w-[500px]">
       <div className="flex flex-[1] hover:scale-105 cursor-pointer transition-all" onClick={() => onResponseAnswer(index)}>

@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
+import ButtonComponent from '../components/ButtonComponent'
 import QuestionComponent from '../components/QuestionComponent'
 import AnswerModel from '../model/AnswerModel'
 import QuestionModel from '../model/QuestionModel'
@@ -16,12 +17,23 @@ const Home: NextPage = () => {
 
   const onResponse = (index: number) => {
     setQuestionMock(getQuestionMock.replyWith(index))
-    console.log(index)
+  };
+
+  const timesUp = () => {
+    if(!getQuestionMock.answered) {
+      setQuestionMock(getQuestionMock.replyWith(-1));
+    }
   };
 
   return (
-    <div className="flex h-[100vh] justify-center items-center">
-      <QuestionComponent question={ getQuestionMock } onResponseQuestion={onResponse}/>
+    <div className="flex flex-col gap-2 h-[100vh] justify-center items-center">
+      <QuestionComponent
+        question={ getQuestionMock }
+        onResponseQuestion={onResponse}
+        timesUpQuestion={timesUp}
+        timeForResponse={ 15 }
+      />
+      <ButtonComponent text="Próxima Questão" hrefComponent="/results" disable={getQuestionMock.answered} />
     </div>
   )
 }
