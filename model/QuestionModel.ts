@@ -32,9 +32,17 @@ export default class QuestionModel {
 
   get answered() {
     for (const answer of this.#answers) {
-      if(answer.revealed) return true
+      if(answer.selected) return true
     }
     return false
+  }
+
+  replyWith(index: number): QuestionModel {
+    const hit = this.#answers[index]?.correct;
+    const newAnswers = this.#answers.map((response) => {
+      return response.toReveal()
+    });
+    return new QuestionModel(this.#id, this.#statement, newAnswers, hit)
   }
 
   shuffleAnswers(): QuestionModel {

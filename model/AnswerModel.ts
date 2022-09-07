@@ -1,39 +1,43 @@
 export default class AnswerModel {
-  #value: string
-  #certain: boolean
-  #revealed: boolean
+  #alternatives: string
+  #correct: boolean
+  #selected: boolean
 
-  constructor(value: string, certain: boolean, revealed = false) {
-    this.#value = value
-    this.#certain = certain
-    this.#revealed = revealed
+  constructor(alternatives: string, correct: boolean, selected = false) {
+    this.#alternatives = alternatives
+    this.#correct = correct
+    this.#selected = selected
   }
 
-  static certain(value: string) {
-    return new AnswerModel(value, true)
+  static correct(alternatives: string) {
+    return new AnswerModel(alternatives, true)
   }
 
-  static wrong(value: string) {
-    return new AnswerModel(value, false)
+  static wrong(alternatives: string) {
+    return new AnswerModel(alternatives, false)
   }
 
-  get value() {
-    return this.#value
+  get alternatives() {
+    return this.#alternatives
   }
 
-  get certain() {
-    return this.#certain
+  get correct() {
+    return this.#correct
   }
 
-  get revealed() {
-    return this.#revealed
+  get selected() {
+    return this.#selected
+  }
+
+  toReveal() {
+    return new AnswerModel(this.#alternatives, this.#correct, true)
   }
 
   convertAnswersToObject() {
     return {
-      value: this.#value,
-      certain: this.#certain,
-      revealed: this.#revealed,
+      alternatives: this.#alternatives,
+      correct: this.#correct,
+      selected: this.#selected,
     }
   }
 }

@@ -1,3 +1,6 @@
 body {
-  background-color: black;
+  color: white;
+  background-color: #9400D3;
+  font-weight: bolder;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
