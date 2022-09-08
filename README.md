@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
+### Hi there! 👋
+
+## What is inside?
+- [Next](https://nextjs.org/docs)
+- [ReactJS](https://reactjs.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind Css](https://tailwindcss.com)
+- [Eslint](https://eslint.org)
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
 ## Getting Started
 
-First, run the development server:
+### Install dependencies:
+
+```bash
+yarn
+```
+
+or
+
+```bash
+npm install
+```
+
+### Run development server
+
+```bash
+yarn dev
+```
+
+or 
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+ ├── components
+ ├── model
+ ├── pages
+ ├── styles
+ ├── utils
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+| Folder         | Description                                          |
+| ----------     | -------------------------------------------          |
+| **model**      | Class creation templates                             |
+| **components** | Page components                                      |
+| **pages**      | Pages components                                     |
+| **styles**     | Application styles                                   |
+| **utils**      | Some auxiliary functions                             |
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+### Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Files           | Description                                    |
+| --------------- | ---------------------------------------------- |
+| **.tsx**        | Component implementation                       |
+| **.ts**    	  | Auxiliary functions and class                  |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Commands
 
-## Deploy on Vercel
+- `dev`: run development server
+- `build`: creates the production build version
+- `lint`: runs the linter in all components and pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
