@@ -50,6 +50,11 @@ export default class QuestionModel {
     return new QuestionModel(this.#id, this.#statement, shuffledAnswers, this.#hit);
   }
 
+  static convertAnswersFromObjectQuestion(obj: QuestionModel): QuestionModel {
+    const responses = obj.answers.map(resp => AnswerModel.convertAnswersFromObject(resp))
+    return new QuestionModel(obj.id, obj.statement, responses, obj.hit)
+  }
+
   convertQuestionsToObject() {
     return {
       id: this.#id,

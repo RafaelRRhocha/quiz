@@ -8,40 +8,38 @@ interface QuizComponentProps {
   lastQuestion: boolean
   questionAnswered: (question: QuestionModel) => void
   nextStep: () => void
-  onResponseProps: (index: number) => void
-  timesUpProps: () => void
 }
 
 const QuizComponent: FC<QuizComponentProps> = ({
   question,
   lastQuestion,
   questionAnswered,
-  nextStep,
-  onResponseProps,
-  timesUpProps
+  nextStep
 }) => {
 
-  // const onResponse = (index: number) => {
-  //   question.replyWith(index)
-  // };
+  const onResponse = (index: number) => {
+    questionAnswered(question.replyWith(index))
+  };
 
-  // const timesUp = () => {
-  //   if(!question.answered) {
-  //     question.replyWith(-1);
-  //   }
-  // };
+  const timesUp = () => {
+    if(!question.answered) {
+      questionAnswered(question.replyWith(-1));
+    }
+  };
 
   return (
     <div className="flex flex-col gap-2 h-[100vh] justify-center items-center">
       {question ? (
-        <QuestionComponent
-          question={ question }
-          onResponseQuestion={onResponseProps}
-          timesUpQuestion={timesUpProps}
-          timeForResponse={ 15 }
-        />
+        <>
+          <QuestionComponent
+            question={ question }
+            onResponseQuestion={ onResponse }
+            timesUpQuestion={ timesUp }
+            timeForResponse={ 15 }
+            />
+          <ButtonComponent onClickComponent={ nextStep } text={lastQuestion ? 'Finalizar Quiz' : 'Próxima Questão'} disable={question.answered} />
+        </>
         ) : false}
-      <ButtonComponent text={lastQuestion ? 'Finalizar Quiz' : 'Próxima Questão'} disable={question.answered} />
     </div>
   );
 }

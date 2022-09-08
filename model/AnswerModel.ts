@@ -33,6 +33,10 @@ export default class AnswerModel {
     return new AnswerModel(this.#alternatives, this.#correct, true)
   }
 
+  static convertAnswersFromObject(obj: AnswerModel): AnswerModel {
+    return new AnswerModel(obj.alternatives, obj.correct, obj.selected)
+  }
+
   convertAnswersToObject() {
     return {
       alternatives: this.#alternatives,

@@ -4,6 +4,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 interface CountdownComponentProps {
   durationTime: number
   timesUpCountdown: () =>  void
+  key: any
 }
 
 const CountdownComponent: FC<CountdownComponentProps> = ({durationTime, timesUpCountdown}) => {

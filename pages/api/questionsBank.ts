@@ -36,6 +36,27 @@ const questions: QuestionModel[] = [
     AnswerModel.correct('118'),
     AnswerModel.wrong('108'),
   ]),
+
+  new QuestionModel(11, 'Qual o número mínimo de jogadores numa partida de futebol?', [
+    AnswerModel.wrong('8'),
+    AnswerModel.wrong('10'),
+    AnswerModel.correct('7'),
+    AnswerModel.wrong('11'),
+  ]),
+
+  new QuestionModel(13, 'Quais os principais autores do Barroco no Brasil?', [
+    AnswerModel.wrong('Miguel de Cervantes, Gregório de Matos e Danthe Alighieri'),
+    AnswerModel.wrong('Álvares de Azevedo, Gregório de Matos e Bento Teixeira'),
+    AnswerModel.correct('Gregório de Matos, Bento Teixeira e Manuel Botelho de Oliveira'),
+    AnswerModel.wrong('Castro Alves, Bento Teixeira e Manuel Botelho de Oliveira'),
+  ]),
+
+  new QuestionModel(15, 'Quem pintou "Guernica"?', [
+    AnswerModel.wrong('Paul Cézanne'),
+    AnswerModel.wrong('Diego Rivera'),
+    AnswerModel.correct('Pablo Picasso'),
+    AnswerModel.wrong('Tarsila do Amaral'),
+  ]),
 ]
 
 export default questions;

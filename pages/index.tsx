@@ -1,46 +1,78 @@
 import type { NextPage } from 'next'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import QuizComponent from '../components/QuizComponent'
-import AnswerModel from '../model/AnswerModel'
 import QuestionModel from '../model/QuestionModel'
 
-const mockQuestion = new QuestionModel(5, 'Qual o nome do presidente do Brasil que ficou conhecido como Jango?', [
-  AnswerModel.wrong('Jânio Quadros'),
-  AnswerModel.wrong('Jacinto Anjos'),
-  AnswerModel.correct('João Goulart'),
-  AnswerModel.wrong('Getúlio Vargas'),
-]);
-
 const Home: NextPage = () => {
-  const [getQuestion, setGetQuestion] = useState(mockQuestion);
+  const router = useRouter();
 
-  const questionAnsweredFunction = () => {
+  const [questionsIds, setQuestionsIds] = useState<number[]>([])
+  const [getQuestion, setGetQuestion] = useState<QuestionModel>();
+  const [rigthQuestions, setRigthQuestions] = useState<number>(0);
 
+  const loadingQuestionsIds = async () => {
+    const resp = await fetch('/api/quiz');
+    const json = await resp.json();
+    setQuestionsIds(json)
+  }
+
+  const loadingQuestions = async (id: number) => {
+    const resp = await fetch(`/api/questions/${id}`);
+    const json = await resp.json();
+    const newQuestion = QuestionModel.convertAnswersFromObjectQuestion(json)
+    setGetQuestion(newQuestion)
+  }
+
+  const questionAnsweredFunction = (questionAnswered: QuestionModel) => {
+    setGetQuestion(questionAnswered);
+    const hitQuestion = questionAnswered.hit;
+    setRigthQuestions(rigthQuestions + (hitQuestion ? 1 : 0))
+  }
+
+  const idNextQuestion = () => {
+    if(getQuestion) {
+      const nextIndex = questionsIds.indexOf(getQuestion.id) + 1
+      return questionsIds[nextIndex]
+    }
+  }
+
+  const nextQuestion = (nextId: number) => {
+    loadingQuestions(nextId)
+  }
+
+  const finishQuiz = () => {
+    router.push({
+      pathname: '/results',
+      query: {
+        total: questionsIds.length,
+        rigths: rigthQuestions
+      }
+    })
   }
 
   const nextStepFunction = () => {
-
+    const nextId = idNextQuestion();
+    nextId ? nextQuestion(nextId) : finishQuiz()
   }
 
-  const onResponse = (index: number) => {
-    setGetQuestion(getQuestion.replyWith(index))
-  };
+  useEffect(() => {
+    loadingQuestionsIds()
+  }, [])
 
-  const timesUp = () => {
-    if(!getQuestion.answered) {
-      setGetQuestion(getQuestion.replyWith(-1));
-    }
-  };
+  useEffect(() => {
+    questionsIds.length > 0 && loadingQuestions(questionsIds[0])    
+  }, [questionsIds])
 
   return (
-    <QuizComponent
-      question={ getQuestion }
-      lastQuestion={ false }
-      questionAnswered={ questionAnsweredFunction }
-      nextStep={ nextStepFunction }
-      onResponseProps={ onResponse }
-      timesUpProps={ timesUp }
-    />
+    getQuestion ? (
+      <QuizComponent
+        question={ getQuestion }
+        lastQuestion={ idNextQuestion() === undefined }
+        questionAnswered={ questionAnsweredFunction }
+        nextStep={ nextStepFunction }
+      />
+    ) : <p className="text-[4rem] text-center mt-[20%]">Carregando...</p>
   )
 }
 

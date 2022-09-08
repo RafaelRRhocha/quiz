@@ -22,10 +22,10 @@ const QuestionComponent: FC<QuestionComponentProps> = ({ question, onResponseQue
   return (
     <div className="flex flex-col items-center mt-[40px]">
       <StatementComponent text={question.statement} />
-      <CountdownComponent durationTime={ timeForResponse ?? 10 } timesUpCountdown={ timesUpQuestion } />
+      <CountdownComponent key={question.id} durationTime={ timeForResponse ?? 10 } timesUpCountdown={ timesUpQuestion } />
       {question.answers.map((element, i) => (
         <AnswerComponent
-          key={ i }
+          key={ `${question.id}-${i}` }
           answer={element}
           index={ i }
           letter={ letters[i].letterStr }
